@@ -1,0 +1,10 @@
+{
+    "name": "gefina",
+    "version": "0.0.0",
+    "description": "Sistemas de gestão de consta a receber",
+    "author": "Alexandre Rodrigues Alves",
+    "type": "module",
+    "scripts": {
+        "dev": "node --watch ./server.ts"
+    }
+}

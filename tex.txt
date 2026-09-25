@@ -1,0 +1,58 @@
+/*
+depois do export, import e from
+serve ts
+export function greet (name: string) {
+    console.log('Hello, '+ name + '!');
+}
+export function saymyname (name: string){
+    console.log (' Seu nome é ' + name);
+}
+
+app ts
+import {greet, saymyname} from './serve.ts';
+greet('alex');*/
+/* servidor web precisa está acessivel para outras maquinas. 
+o node transforma o codigo em algo disponivel 
+servidor web precisa está pronto para responder solicitação
+navegador é quem solicita
+servidor web é node
+todo projeto node é necessario ter um manifesto, define o que é, o que precisa, quem é autor
+todo arquivo node precisa do manifesto pq se não vai ser impossivel ser excutado
+manifesto se chama package.json
+muito dos arquivos vao ser exportado, um conjuto de modulo é um pacote
+pacote é um projeto q dentro dele tem varios modulos
+amarzenamento, memoria rám, processamento e memoria de rede
+hieraquia
+blibioteca
+pacote junção de um ou mais modulos
+modulo arquivo q exporta algo
+a liguagem do arquivo é json, assim o node entende q é um manisfesto
+package.json também é aberto por {} dentro todos são string("")
+e : e , 
+qnd tiver ts é bom o type ser module pq se for commonjs pode da problema 
+modulo http é algo q já vem do node, que podemos integrar no projeto
+como chamar
+import {} from 'node: http'
+quando importar algo do node tem q botar 'node:' 
+js diferencia letra maiuscula e mminuscula
+camelCase (servido para diferenciar uma palavra da outra, primeira maiuscula e a seguinte mminuscula)
+PascalCase (Primeiro Letra maiuscula de todas palavras)
+snake_case
+kebab-case (serve mais pra nome de arquivo)
+js sempre vai ser camelCase
+porta padrao de servidor web é 3000
+createrServer().listen(3000); 
+createrServer espera receber como argumento outra função
+(uma função pode receer outra função, chamada funções callback)
+a função interna só vai ser excutada a parti da outra excução
+a função é anonima sem nome
+a função de dentro vai agregar a logica da api
+a funçaõ createrServer so vai ser excutada pro uma 
+quando a proriedade de objeto é composto tem q ser em ''
+por ex 'fist-name'
+    JSON.stringify tranforma  texto em objeto
+    e JSON.parse tranforma objeto em texto
+    node --watch serve(nome do arquivo).ts
+    request.utl só mostra o que vem dps do /
+    npm run dev
+*/
