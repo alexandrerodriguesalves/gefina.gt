@@ -56,3 +56,11 @@ por ex 'fist-name'
     request.utl só mostra o que vem dps do /
     npm run dev
 */
+
+/* const invoices: invoices[]= [{
+  
+ }
+];
+está dizendo q esse array é um objeto, do tipo invoices
+amarrar a lista para amarzenar soemnete objetos que são parecidos com modelo q criei
+*/
