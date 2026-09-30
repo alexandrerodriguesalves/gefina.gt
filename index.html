@@ -48,16 +48,17 @@
                 customer: { id: 2, name: 'Gráfica Aurora', email: 'contato@graficaaurora.com.br' }
             },
         ];
-       
+
         const tableBody = document.querySelector('tbody');
 
-        function statusLabel(status){
-            if (status !== 'Paid' ) {
-                return 'Peding'
-                
+        function statusLabel(status) {
+            if (status === 'paid') {
+                return 'Pago';
+            } else {
+                return 'Pendente';
             }
-        
         }
+    
 
         for (let i = 0; i < invoices.length; i++) {
             const invoice = invoices[i];
