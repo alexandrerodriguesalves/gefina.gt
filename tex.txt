@@ -65,3 +65,12 @@ está dizendo q esse array é um objeto, do tipo invoices
 .
 amarrar a lista para amarzenar soemnete objetos que são parecidos com modelo q criei
 */
+/Antes:
+O código dentro do laço for estava muito repetitivo e extenso (cerca de 15 linhas). Para cada informação da fatura (cliente, valor, etc.), eu precisava repetir três passos: criar o elemento <td> (createElement), inserir o texto (textContent = invoice...) e anexá-lo à linha (appendChild).
+O que eu fiz:
+Para deixar o código mais resumido e inteligente, criei uma função ajudante chamada adicionarCelula(linha, valor)
+const celula = document.createElement('td'); (Cria a coluna).
+celula.textContent = valor; (Recebe a informação que vai aparecer na tela).
+linha.appendChild(celula); (Pega a coluna pronta e joga dentro da linha <tr>).
+No laço for, em vez de escrever as 3 linhas para cada dado, chamo apenas a função, passando a variável row (linha) e o dado específico do objeto, por exemplo:
+adicionarCelula(row, invoice.customer.name);*/
