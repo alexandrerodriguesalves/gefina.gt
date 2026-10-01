@@ -74,3 +74,48 @@ celula.textContent = valor; (Recebe a informação que vai aparecer na tela).
 linha.appendChild(celula); (Pega a coluna pronta e joga dentro da linha <tr>).
 No laço for, em vez de escrever as 3 linhas para cada dado, chamo apenas a função, passando a variável row (linha) e o dado específico do objeto, por exemplo:
 adicionarCelula(row, invoice.customer.name);*/
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        const listLabel = [
+            { id: 1, label: 'Send' },
+            { id: 2, label: 'Reset' },
+            { id: 3, label: 'Cancel' }
+        ];
+
+        const root = document.querySelector('#root');
+
+        const Button = function (props) {
+            return <button>{props.text}</button>;
+        }
+
+        const App = function () {
+            return (
+                <>
+                    {listLabel.map(function (label) {
+                        return <Button key={label.id} text={label.label} />
+                    })}
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(root).render(<App />);
+    </script>
+</body>
+
+</html>
