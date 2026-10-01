@@ -66,19 +66,19 @@
           return "Pendente";
         }
       }
-      function adicionarCelula(linha, valor) {
+      function addcell(row, value) {
         const celula = document.createElement("td");
-        celula.textContent = valor;
+        celula.textContent = value;
         linha.appendChild(celula);
       }
       for (let i = 0; i < invoices.length; i++) {
         const invoice = invoices[i];
         const row = document.createElement("tr");
-        adicionarCelula(row, invoice.customer.name);
-        adicionarCelula(row, invoice.amount);
-        adicionarCelula(row, invoice.issueDate);
-        adicionarCelula(row, invoice.dueDate);
-        adicionarCelula(row, statusLabel(invoice.status));
+        addcell(row, invoice.customer.name);
+        addcell(row, invoice.amount);
+        addcell(row, invoice.issueDate);
+        addcell(row, invoice.dueDate);
+        addcell(row, statusLabel(invoice.status));
         tableBody.appendChild(row);
       }
     </script>
