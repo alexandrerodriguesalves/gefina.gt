@@ -119,4 +119,12 @@ adicionarCelula(row, invoice.customer.name);*/
 </body>
 
 </html>
-texto
+de function não precisa do funcao, substituindo pelo aron functions (=>)
+por ex
+const greet = () => {
+    return 'hello'
+
+}
+ normalmente seria const function = (greet) {
+    return 'hello'
+ }
