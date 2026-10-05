@@ -128,3 +128,7 @@ const greet = () => {
  normalmente seria const function = (greet) {
     return 'hello'
  }
+ PascalCase é so componete de react
+
+ sempre que criar um componet ja comeca com 
+ export defaul function (nome do arquivo)
