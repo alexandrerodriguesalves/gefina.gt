@@ -132,3 +132,14 @@ const greet = () => {
 
  sempre que criar um componet ja comeca com 
  export defaul function (nome do arquivo)
+
+ await  fetch (é a espera)
+ p dois ter a msm origem, precisa ser o esquema e host igual (esquema é o protocolo, http)
+ react é feito pelo node.js, apesar de ser um ocnstrutor de front-end
+ ele so excuta pelo servidor.
+ sempre que salva algo, o modulo (arquivo inteiro) recarregava
+ no momento de bota  o useEfect, precisa declara uma função
+ async function geInvoice
+
+ componente é uma função que returna html
+ try e catch é igual if e else
