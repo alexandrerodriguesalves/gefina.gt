@@ -2,7 +2,7 @@
   "type": "module",
 
   "scripts": {
-    "start": "node ./serve.ts",
+    "start": "node ./server.ts",
     "dev": "node --watch ./server.ts",
     "check": "tsc --noEmit"
   },
