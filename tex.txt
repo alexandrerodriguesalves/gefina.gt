@@ -148,3 +148,6 @@ const greet = () => {
          "build": "vite build",
 no package.json
 e depois npm run build --prefix web
+import patch from 'node:patch' é Como o Windows usa barras invertidas (\) 
+e o Mac/Linux usa barras normais (/) para separar pastas, o módulo path resolve essa bagunça para você. 
+Em vez de você digitar o caminho do arquivo manualmente e correr o risco de quebrar em outro sistema, você usa o path.
