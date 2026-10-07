@@ -2,8 +2,9 @@
   "type": "module",
 
   "scripts": {
-    "check": "tsc --noEmit",
-    "dev": "node --watch ./server.ts"
+    "start": "node ./serve.ts",
+    "dev": "node --watch ./server.ts",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
