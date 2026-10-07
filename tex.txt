@@ -143,3 +143,8 @@ const greet = () => {
 
  componente é uma função que returna html
  try e catch é igual if e else
+
+ para adicionar algo no service web tem q transformar o react, jsx em js puro.
+         "build": "vite build",
+no package.json
+e depois npm run build --prefix web

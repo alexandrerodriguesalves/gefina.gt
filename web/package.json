@@ -2,7 +2,8 @@
     "type": "module",
     "scripts": {
         "dev":"vite",
-        "check": "tsc --noEmit"
+        "build": "vite build",
+        "check": "tsc --noclear Emit"
     },
     "devDependencies": {
         "@types/react": "^19.3.0",
