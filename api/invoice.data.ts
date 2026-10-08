@@ -8,7 +8,7 @@ interface Customer {
 
 interface Invoice {
   id: number;
-  amount: number;
+  amount: number; 
   status: InvoiceStatus;
   issueDate: string;
   dueDate: string;

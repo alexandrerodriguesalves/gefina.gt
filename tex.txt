@@ -1,4 +1,4 @@
-/*
+
 depois do export, import e from
 serve ts
 export function greet (name: string) {
@@ -11,7 +11,8 @@ export function saymyname (name: string){
 app ts
 import {greet, saymyname} from './serve.ts';
 greet('alex');*/
-/* servidor web precisa está acessivel para outras maquinas. 
+
+ servidor web precisa está acessivel para outras maquinas. 
 o node transforma o codigo em algo disponivel 
 servidor web precisa está pronto para responder solicitação
 navegador é quem solicita
@@ -55,24 +56,27 @@ por ex 'fist-name'
     node --watch serve(nome do arquivo).ts
     request.utl só mostra o que vem dps do /
     npm run dev
-*/
 
-/* const invoices: invoices[]= [{
+
+ const invoices: invoices[]= [{
   
  }
 ];
 está dizendo q esse array é um objeto, do tipo invoices
 .
 amarrar a lista para amarzenar soemnete objetos que são parecidos com modelo q criei
-*/
+
 /Antes:
-O código dentro do laço for estava muito repetitivo e extenso (cerca de 15 linhas). Para cada informação da fatura (cliente, valor, etc.), eu precisava repetir três passos: criar o elemento <td> (createElement), inserir o texto (textContent = invoice...) e anexá-lo à linha (appendChild).
+O código dentro do laço for estava muito repetitivo e extenso (cerca de 15 linhas). 
+Para cada informação da fatura (cliente, valor, etc.), eu precisava repetir três passos:
+criar o elemento <td> (createElement), inserir o texto (textContent = invoice...) e anexá-lo à linha (appendChild).
 O que eu fiz:
 Para deixar o código mais resumido e inteligente, criei uma função ajudante chamada adicionarCelula(linha, valor)
 const celula = document.createElement('td'); (Cria a coluna).
 celula.textContent = valor; (Recebe a informação que vai aparecer na tela).
 linha.appendChild(celula); (Pega a coluna pronta e joga dentro da linha <tr>).
-No laço for, em vez de escrever as 3 linhas para cada dado, chamo apenas a função, passando a variável row (linha) e o dado específico do objeto, por exemplo:
+No laço for, em vez de escrever as 3 linhas para cada dado, chamo apenas a função
+passando a variável row (linha) e o dado específico do objeto, por exemplo:
 adicionarCelula(row, invoice.customer.name);*/
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -145,9 +149,39 @@ const greet = () => {
  try e catch é igual if e else
 
  para adicionar algo no service web tem q transformar o react, jsx em js puro.
-         "build": "vite build",
+"build": "vite build",
 no package.json
 e depois npm run build --prefix web
 import patch from 'node:patch' é Como o Windows usa barras invertidas (\) 
-e o Mac/Linux usa barras normais (/) para separar pastas, o módulo path resolve essa bagunça para você. 
-Em vez de você digitar o caminho do arquivo manualmente e correr o risco de quebrar em outro sistema, você usa o path.
+e o Mac/Linux usa barras normais (/) para separar pastas
+o módulo path resolve essa bagunça para você.
+Em vez de você digitar o caminho do arquivo manualmente e correr o risco de quebrar em outro sistema
+você usa o path.
+
+ sistemas mocado
+ não ha possibilidade de amazenanento persistente de uma variavel. 
+ banco de dados é um arquivo binario que é criado dentro de um disco, amarzenamento de um computador
+sdbg
+sistema gerenciador de banco de dados
+o sgbd sobe um servidor web, e deixa entrar somente quem tem credenciais. 
+
+branc são criada por tarefas
+entidades, cliente, faturas e usuarios
+usuário é dententor do cliente, e os cliente é dententor das faturas
+(ou seja, elas são relacionais)
+dados que iremos usar:
+serial - inteiro - automatico e incremental
+(ele é inteiro, mas tem valor gerado automaticamento pelo banco, e nunca vai ser o mesmo)
+dados integer  - inteiros (números)
+dados text - (string)
+date - texto - data
+timestaump - texto - data/hora
+
+not null
+unique (não deixa ninguem com algo duplicado)
+usuario não pode ser deletado ou desativado se tiver cliente com faturas associada a ele, chamado efeito cascata
+relacionamento entre duas faturas acontece na propria tabela
+user : id, name, emai, roul
+costumes : id, name, eimage, user.id
+iu é o primery key na primeira tabela
+e o fory key, a parti deles que dao p cirar os relacionamentos
