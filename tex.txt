@@ -185,3 +185,25 @@ user : id, name, emai, roul
 costumes : id, name, eimage, user.id
 iu é o primery key na primeira tabela
 e o fory key, a parti deles que dao p cirar os relacionamentos
+
+
+convencoes sql
+palavras reservadas sao escritas em maiusculo
+texto são delimitado por apostrofo e não por aspa ''
+todo comando que usarmos, precisa terminar com ;
+duas categoria de commando
+ ddl = data defenicion lenguace
+   > Criar tabela
+   > Alterar
+   > Not null
+ dml = data manipulacion languace
+   > inserir
+   > Were
+
+
+   na instrução dos dados pode se usar aspas duplas, e na 
+   o now pega a hora do registro
+   default é o se 
+   a ordem importa no sql
+   serial e integer é inteiros
+   
