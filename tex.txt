@@ -207,3 +207,11 @@ duas categoria de commando
    a ordem importa no sql
    serial e integer é inteiros
    
+   o id nunca volta para anterior, mesmo que apague
+   comportamento natural de banco de dados.
+   vamos inserir um codigo para reserta o dados do id, sempre que apaguar um dado, vai ser reinicidado
+
+   na grande maioria do SELECT precisa de um FROM 
+   generate_series(1, 81) ele vai gerar sequencia de numeros de 1 até o numero final
+   ele vai gerar um valor e vai ser a variante
+   AS renomeia o valor (por exemplo o let)
