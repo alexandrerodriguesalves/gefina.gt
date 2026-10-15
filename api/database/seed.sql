@@ -1,6 +1,4 @@
 
--- Dados fictícios para o ambiente de desenvolvimento.
--- Pode ser executado mais de uma vez: esvazia as tabelas antes de inserir.
 
 TRUNCATE users, sessions, customers, invoices RESTART IDENTITY;
 
@@ -10,9 +8,6 @@ INSERT INTO users (name, email, password_hash, role) VALUES
   ('Carlos Daniel', 'carlos.daniel@gefina.com.br', 'placeholder', 'user'),
   ('Eder Fagundes', 'eder.fagundes@gefina.com.br', 'placeholder', 'user'),
   ('Gustavo Hebe', 'gustavo.hebe@gefina.com.br', 'placeholder', 'user');
-
--- Oito clientes de Ana Bessa, sete de Carlos Daniel,
--- seis de Eder Fagundes e três de Gustavo Hebe.
 
 INSERT INTO customers (user_id, name, email) VALUES
   (2, 'Alvorada Engenharia', 'contato@alvoradaengenharia.com.br'),
@@ -40,7 +35,6 @@ INSERT INTO customers (user_id, name, email) VALUES
   (5, 'Zênite Consultoria', 'contato@zeniteconsultoria.com.br'),
   (5, 'Âncora Naval', 'contato@ancoranaval.com.br');
 
--- Oitenta e uma faturas pagas, com emissão ao longo do último ano.
 
 INSERT INTO invoices (customer_id, amount, status, issue_date, due_date, created_at)
 SELECT
@@ -52,7 +46,6 @@ SELECT
   CURRENT_DATE - n * 4 + n % 5
 FROM generate_series(1, 81) AS n;
 
--- Sessenta e três faturas pendentes com vencimento futuro.
 
 INSERT INTO invoices (customer_id, amount, status, issue_date, due_date, created_at)
 SELECT
@@ -63,8 +56,6 @@ SELECT
   CURRENT_DATE + 5 + n % 50,
   CURRENT_DATE - n % 10
 FROM generate_series(1, 63) AS n;
-
--- Trinta e seis faturas pendentes com vencimento transcorrido.
 
 INSERT INTO invoices (customer_id, amount, status, issue_date, due_date, created_at)
 SELECT

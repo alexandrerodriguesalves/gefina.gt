@@ -225,4 +225,6 @@ duas categoria de commando
    aomente atraves do node que vai excutar o .env
    render éa produção, que executa o node
    ou seja, .env so vai existir no local, e em prodrução 
+   classe é uma função feita para criar um objetoele precisa ser iniciada com new
+   sql inject 
    
