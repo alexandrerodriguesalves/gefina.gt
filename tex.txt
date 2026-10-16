@@ -215,3 +215,16 @@ duas categoria de commando
    generate_series(1, 81) ele vai gerar sequencia de numeros de 1 até o numero final
    ele vai gerar um valor e vai ser a variante
    AS renomeia o valor (por exemplo o let)
+
+   api vai se conectar com o bancp (neon)
+   p isso precisa consuktar os dados, o sql
+   verificar as credenciais
+   e depois abrir a interface
+   .env vai conter variavel de ambientes
+   somente oambiete que executa api que vai ter acesso ao arquivo(no caso o node)
+   aomente atraves do node que vai excutar o .env
+   render éa produção, que executa o node
+   ou seja, .env so vai existir no local, e em prodrução 
+   classe é uma função feita para criar um objetoele precisa ser iniciada com new
+   sql inject 
+   
