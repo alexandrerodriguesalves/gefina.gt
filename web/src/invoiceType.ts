@@ -1,16 +1,11 @@
-export type InvoiceStatus = 'pending' | 'paid';
-
-export interface Customer {
-  id: number;
-  name: string;
-  email: string;
-}
+export type InvoicesSituation = 'paid' | 'overdue' | 'pending'; // (ou os valores que você usa)
 
 export interface Invoice {
-  id: number;
-  amount: number;
-  status: InvoiceStatus;
-  issueDate: string;
-  dueDate: string;
-  customer: Customer;
-}
+    id: string;
+    customer: {
+        name: string;
+    };
+    amount: number;
+    issueDate: string;
+    dueDate: string;
+    situation: InvoicesSituation;}
