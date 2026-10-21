@@ -53,3 +53,7 @@ th{
     font-weight: 500;
     color: var(--color-text-muted);
 }
+
+.numeric{
+    font-variant-numeric: tabular-nums;
+}
