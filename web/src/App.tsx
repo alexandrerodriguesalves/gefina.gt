@@ -5,8 +5,8 @@ import {
     Link
 } from 'react-router-dom';
 
-import DashboardPage from './DashboardPage.tsx';
-import InvoicePage from './invoicePage.tsx';
+import DashboardPage from './dashboardPage.tsx';
+import InvoicePage from './InvoicePage.tsx';
 
 export default function App() {
     return <BrowserRouter>
