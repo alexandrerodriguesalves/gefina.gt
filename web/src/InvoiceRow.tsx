@@ -1,4 +1,4 @@
-import { Invoice } from './invoiceType';
+import { Invoice } from './dashboardType';
 import { situationLabel, formatdate, fomartCurrency } from './utils';
 
 interface InvoiceRowProps {

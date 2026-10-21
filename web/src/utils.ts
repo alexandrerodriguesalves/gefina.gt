@@ -1,4 +1,4 @@
-import { InvoicesSituation} from './invoiceType';
+import { InvoicesSituation} from './dashboardType';
 export function situationLabel(situation: InvoicesSituation) {
     return situation === 'paid' ? 'Paga' : situation === 'overdue' ? 'Atrasada': 'Pendente'
 }

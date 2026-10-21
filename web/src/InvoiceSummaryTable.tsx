@@ -1,4 +1,4 @@
-import { Invoice } from "./invoiceType.ts";
+import { Invoice } from "./dashboardType.ts";
 
 import {fomartCurrency, formatdate} from './utils.ts'
 

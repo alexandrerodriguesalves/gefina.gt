@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-
-import { Invoice } from './invoiceType.ts';
+import { Invoice } from './dashboardType.ts';
 import InvoiceTable from './InvoiceTable.tsx';
 
 export default function InvoicePage() {
@@ -34,8 +33,10 @@ export default function InvoicePage() {
 
     if (error) return <p>{error}</p>;
 
-    return <>
-        <h1>Faturas</h1>
-        <InvoiceTable invoices={invoices} />
-    </>
+    return (
+        <>
+            <h1>Faturas</h1>
+            <InvoiceTable invoices={invoices} />
+        </>
+    );
 }
