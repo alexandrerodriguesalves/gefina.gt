@@ -57,3 +57,18 @@ th{
 .numeric{
     font-variant-numeric: tabular-nums;
 }
+a{
+    color: var(--color-primary);
+}
+
+situation-paid{
+    color: var(--); 
+}
+
+situation-pending{
+    color: var(--);
+}
+
+situation-overdue{
+    color: var(--);
+}

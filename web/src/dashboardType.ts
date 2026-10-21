@@ -1,11 +1,14 @@
-export type InvoicesSituation = 'paid' | 'overdue' | 'pending'; // (ou os valores que você usa)
+import type { Invoice } from './invoiceType.ts';
 
-export interface Invoice {
-    id: string;
-    customer: {
-        name: string;
-    };
-    amount: number;
-    issueDate: string;
-    dueDate: string;
-    situation: InvoicesSituation;}
+export interface DashboardTotals {
+    paid: number;
+    pending: number;
+    invoiceCount: number;
+    customerCount: number;
+}
+
+export interface Dashboard {
+    totals: DashboardTotals;
+    recentInvoices: Invoice[];
+    overdueInvoices: Invoice[];
+}
