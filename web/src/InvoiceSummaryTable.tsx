@@ -1,4 +1,4 @@
-import { Invoice } from "./invoiceType.ts";
+import { Invoice } from "./dashboardType.ts";
 
 import {fomartCurrency, formatdate} from './utils.ts'
 
@@ -21,8 +21,8 @@ export default function InvoiceSummaryTable(props: InvoiceSummaryTableProps){
                     {props.invoices.map((invoice) =>{
                     return <tr>
                         <td>{invoice.customer.name}</td>
-                        <td>{fomartCurrency(invoice.amount)}</td>
-                        <td>{formatdate(props.date(invoice))}</td>
+                        <td className="numeric">{fomartCurrency(invoice.amount)}</td>
+                        <td className="numeric">{formatdate(props.date(invoice))}</td>
                     </tr>;
                 })}
             </tbody>

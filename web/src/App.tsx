@@ -3,20 +3,24 @@ import {
     Routes,
     Route,
     Link
-} from 'react-router';
+} from 'react-router-dom';
 
 import DashboardPage from './DashboardPage.tsx';
-import InvoicePage from './InvoicePage.tsx';
+import InvoicePage from './invoicePage.tsx';
 
 export default function App() {
     return <BrowserRouter>
-        <nav>
-            <Link to='/'>Painiel Inicial</Link>
-            <Link to='/faturas'>Faturas</Link>
-        </nav>
-        <Routes>
-            <Route path='/' element={<DashboardPage/>} />
-            <Route path='/faturas' element={<InvoicePage/>} />
-        </Routes>
-    </BrowserRouter>
+        <aside>
+            <header>Gefina</header>
+            <nav>
+                <Link to='/'>Painel Inicial</Link> | <Link to='/faturas'>Faturas</Link>
+            </nav>
+        </aside><main>
+
+            <Routes>
+                <Route path='/' element={<DashboardPage />} />
+                <Route path='/faturas' element={<InvoicePage />} />
+            </Routes>
+        </main>
+        </BrowserRouter>
 }
