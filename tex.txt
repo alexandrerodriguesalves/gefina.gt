@@ -228,3 +228,9 @@ duas categoria de commando
    classe é uma função feita para criar um objetoele precisa ser iniciada com new
    sql inject 
    toda repetião é candidata a função
+
+   css
+   position: fixed;
+  top: 0;
+  bottom: 0; ou
+  heigt(altura): 100%
