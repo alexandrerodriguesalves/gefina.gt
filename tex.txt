@@ -234,3 +234,6 @@ duas categoria de commando
   top: 0;
   bottom: 0; ou
   heigt(altura): 100%
+
+  rest client extesion serve para verificar sem subir 
+  ### isso é o separador e dizer para que serve

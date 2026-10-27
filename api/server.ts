@@ -1,12 +1,9 @@
 import express from 'express';
 import path, { join } from 'node:path';
-
 import dashboard from './dashboard.route.ts';
 import invoices from './invoice.route.ts';
-
 import pool from './database.ts';
-
-import handleError from './error.midlleware.ts';
+import handleError from './error.middleware.ts';
 
 const app = express();
 app.use(express.json());
