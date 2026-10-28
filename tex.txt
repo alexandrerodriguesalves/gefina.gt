@@ -237,3 +237,15 @@ duas categoria de commando
 
   rest client extesion serve para verificar sem subir 
   ### isso é o separador e dizer para que serve
+
+  forms 
+  input é algo que é de fora e vem de fora
+  step no input é p fixar as casas decimais por exemplo
+  step '0.02' no number
+  label é uma etiqueta para um input
+  conectar label ao input é 
+  label for ''
+  input id='' 
+   <label for="For">Olá, digite aqui</label>
+  <input id="For""text">
+    <button type="reset">Enviar</button>
