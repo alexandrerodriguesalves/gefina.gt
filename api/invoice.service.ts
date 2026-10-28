@@ -103,7 +103,6 @@ export async function findInvoicesById(id: number): Promise<Invoice | undefined>
   return toInvoice(connect.rows[0]);
 }
 
-// Corrigido o nome: findRecentInvoices (sem a letra 'e' extra)
 export async function findRecentInvoices(): Promise<Invoice[]> {
   const connect = await pool.query<InvoiceRow>(
     `${baseQuery} ORDER BY invoices.created_at DESC LIMIT 5;`
