@@ -1,13 +1,15 @@
 export type InvoiceStatus = 'PAID' | 'PENDING' | 'CANCELLED';
 export type InvoicesSituation = 'OVERDUE' | 'UP_TO_DATE'
 
-export interface CustomerOpetion {
+export interface CustomersOptions {
   id: number;
+  name: string;
   email: string;
 }
 
 export interface Customer {
   id: number;
+  name:string;
   email: string;
 }
 
