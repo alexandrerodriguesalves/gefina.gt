@@ -17,14 +17,14 @@ export const invoiceSchema = z
             customerId: z
                 .number({ message: 'O cliente é obrigatório.' })
                 .int('O identificador do cliente deve ser um número inteiro.')
-                .positive('O identificador do cliente deve ser maior que zero.'),
+                .positive('O cliente é obrigatório.'),
             amount: z
                 .number({ message: 'O valor é obrigatório.' })
                 .int('O valor da fatura deve ser um número inteiro.')
                 .positive('O valor da fatura deve ser maior que zero.'),
             status: invoiceStatusSchema,
-            issueDate: z.string().date({ message: 'A data de emissão deve ser uma data válida.' }),
-            dueDate: z.string().date({ message: 'A data de vencimento deve ser uma data válida.' })
+            issueDate: z.iso.date({ message: 'A data de emissão deve ser uma data válida.' }),
+            dueDate: z.iso.date({ message: 'A data de vencimento deve ser uma data válida.' })
         }
     )
     .refine(

@@ -1,8 +1,12 @@
-import {Pool} from 'pg';
+import pg from "pg";
 
-if (!process.env.DATABASE_URL) throw new Error
- ('A variável DATABASSS_URL não está disponivel');
+const { Pool } = pg;
 
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: true,
+  },
+});
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 export default pool;

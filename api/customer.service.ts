@@ -1,12 +1,18 @@
 import pool from "./database.ts";
 
-interface CustomersOption{
-    id: number;
-    name: string;
-    email: string;
+interface CustomersOption {
+  id: number;
+  name: string;
+  email: string;
 }
 
-export async function findCustomersOptions(): Promise<CustomersOption[]>{
-    const connect= await pool.query<CustomersOption>('SELECT id, name, email FROM customers ORDE BY name;');
-    return connect.rows;
+export async function findCustomersOptions(): Promise<CustomersOption[]> {
+  const query = `
+    SELECT id, name, email 
+    FROM customers 
+    ORDER BY name
+  `; 
+  
+  const result = await pool.query(query);
+  return result.rows;
 }
