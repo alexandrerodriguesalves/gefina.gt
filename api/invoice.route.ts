@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import {
   findAllInvoices,
-  findInvoicesById,
+  findInvoiceById,
   insertInvoice,
   modifyInvoice,
   removeInvoice
@@ -36,7 +36,7 @@ router.get('/:id', async (request, response) => {
     });
   }
 
-  const invoice = await findInvoicesById(id);
+  const invoice = await findInvoiceById(id);
 
   if (!invoice) {
     return response.status(404).json({
