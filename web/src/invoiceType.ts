@@ -35,5 +35,5 @@ export interface InvoiceFieldErrors {
 
 export interface ApiFailure {
   message: string;
-  fields: InvoiceFieldErrors
+  fields: InvoiceFieldErrors;
 }

@@ -1,8 +1,14 @@
-import prisma from "./prisma.ts";
-import type { Prisma, Invoice as InvoiceRecord } from "@prisma/client";
-import type { InvoiceStatus, InvoiceInput } from "./invoice.schema.ts";
+import type {
+  Invoice as InvoiceRecord,
+  Prisma,
+} from '@prisma/client';
+import type {
+  InvoiceInput,
+  InvoiceStatus,
+} from './invoice.schema.ts';
+import prisma from './prisma.ts';
 
-type InvoiceSituation = "paid" | "pending" | "overdue";
+type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 
 export interface Invoice {
   id: number;
@@ -24,11 +30,11 @@ type InvoiceWithCustomer = Prisma.InvoiceGetPayload<{
 
 function formatInvoice(record: InvoiceWithCustomer): Invoice {
   const situation: InvoiceSituation =
-    record.status === "paid"
-      ? "paid"
+    record.status === 'paid'
+      ? 'paid'
       : record.dueDate.getTime() < Date.now()
-        ? "overdue"
-        : "pending";
+        ? 'overdue'
+        : 'pending';
 
   return {
     id: record.id,
@@ -48,7 +54,7 @@ function formatInvoice(record: InvoiceWithCustomer): Invoice {
 export async function findAllInvoices(): Promise<Invoice[]> {
   const records = await prisma.invoice.findMany({
     include: { customer: true },
-    orderBy: { id: "desc" },
+    orderBy: { id: 'desc' },
   });
 
   return records.map(formatInvoice);
@@ -68,7 +74,7 @@ export async function findInvoiceById(
 export async function findRecentInvoices(): Promise<Invoice[]> {
   const records = await prisma.invoice.findMany({
     include: { customer: true },
-    orderBy: { id: "desc" },
+    orderBy: { id: 'desc' },
     take: 5,
   });
 
@@ -78,18 +84,20 @@ export async function findRecentInvoices(): Promise<Invoice[]> {
 export async function findOverdueInvoices(): Promise<Invoice[]> {
   const records = await prisma.invoice.findMany({
     where: {
-      status: "pending",
+      status: 'pending',
       dueDate: { lt: new Date() },
     },
     include: { customer: true },
-    orderBy: { dueDate: "asc" },
+    orderBy: { dueDate: 'asc' },
     take: 5,
   });
 
   return records.map(formatInvoice);
 }
 
-export async function insertInvoice(data: InvoiceInput): Promise<Invoice> {
+export async function insertInvoice(
+  data: InvoiceInput,
+): Promise<Invoice> {
   const record = await prisma.invoice.create({
     data: {
       customerId: data.customerId,

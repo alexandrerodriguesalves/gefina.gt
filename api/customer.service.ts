@@ -1,4 +1,4 @@
-import prisma from "./prisma.ts";
+import prisma from './prisma.ts';
 
 interface CustomerOption {
   id: number;
@@ -6,13 +6,15 @@ interface CustomerOption {
   email: string;
 }
 
-export async function findCustomersOptions(): Promise<CustomerOption[]> {
+export async function findCustomersOptions(): Promise<
+  CustomerOption[]
+> {
   return await prisma.customer.findMany({
     select: {
       id: true,
       name: true,
       email: true,
     },
-    orderBy: { name: "asc" },
+    orderBy: { name: 'asc' },
   });
 }
