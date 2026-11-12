@@ -1,158 +1,146 @@
-import pool from './database.ts';
-import type { InvoiceInput, InvoiceStatus } from './invoice.schema.ts';
+import type {
+  Invoice as InvoiceRecord,
+  Prisma,
+} from '@prisma/client';
+import type {
+  InvoiceInput,
+  InvoiceStatus,
+} from './invoice.schema.ts';
+import prisma from './prisma.ts';
 
-type InvoicesSituation = 'paid' | 'pending' | 'overdue';
-
-interface Customer {
-  id: number;
-  name: string;
-  email: string;
-}
+type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 
 export interface Invoice {
   id: number;
   amount: number;
   status: InvoiceStatus;
-  situation: InvoicesSituation;
+  situation: InvoiceSituation;
   issueDate: string;
   dueDate: string;
-  customer: Customer;
-}
-
-export interface CreateInvoicePayload {
-  customerId: number;
-  amount: number;
-  status: InvoiceStatus;
-  issueDate: string;
-  dueDate: string;
-}
-
-export interface UpdateInvoicePayload {
-  customerId?: number;
-  amount?: number;
-  status?: InvoiceStatus;
-  issueDate?: string;
-  dueDate?: string;
-}
-
-interface InvoiceRow {
-  id: number;
-  amount: number;
-  status: InvoiceStatus;
-  situation: InvoicesSituation;
-  issue_date: string;
-  due_date: string;
-  customer_id: number;
-  customer_name: string;
-  customer_email: string;
-}
-
-function toInvoice(row: InvoiceRow): Invoice {
-  return {
-    id: row.id,
-    amount: row.amount,
-    status: row.status,
-    situation: row.situation,
-    issueDate: row.issue_date,
-    dueDate: row.due_date,
-    customer: {
-      id: row.customer_id,
-      name: row.customer_name,
-      email: row.customer_email
-    }
+  customer: {
+    id: number;
+    name: string;
+    email: string;
   };
 }
 
-function toInvoices(rows: InvoiceRow[]): Invoice[] {
-  return rows.map(toInvoice);
-}
+type InvoiceWithCustomer = Prisma.InvoiceGetPayload<{
+  include: { customer: true };
+}>;
 
-const baseQuery = `
-  SELECT
-    invoices.id,
-    invoices.amount,
-    invoices.status,
-    CASE 
-      WHEN invoices.status = 'paid' THEN 'paid'
-      WHEN invoices.due_date < CURRENT_DATE THEN 'overdue'
-      ELSE 'pending'
-    END AS situation,
-    invoices.issue_date::text,
-    invoices.due_date::text,
-    customers.id AS customer_id,
-    customers.name AS customer_name,
-    customers.email AS customer_email
-  FROM invoices
-  JOIN customers ON customers.id = invoices.customer_id
-`;
+function formatInvoice(record: InvoiceWithCustomer): Invoice {
+  const situation: InvoiceSituation =
+    record.status === 'paid'
+      ? 'paid'
+      : record.dueDate.getTime() < Date.now()
+        ? 'overdue'
+        : 'pending';
+
+  return {
+    id: record.id,
+    amount: record.amount,
+    status: record.status as InvoiceStatus,
+    situation,
+    issueDate: record.issueDate.toISOString().slice(0, 10),
+    dueDate: record.dueDate.toISOString().slice(0, 10),
+    customer: {
+      id: record.customer.id,
+      name: record.customer.name,
+      email: record.customer.email,
+    },
+  };
+}
 
 export async function findAllInvoices(): Promise<Invoice[]> {
-  const connect = await pool.query<InvoiceRow>(
-    `${baseQuery} ORDER BY invoices.created_at DESC;`
-  );
-  return toInvoices(connect.rows);
+  const records = await prisma.invoice.findMany({
+    include: { customer: true },
+    orderBy: { id: 'desc' },
+  });
+
+  return records.map(formatInvoice);
 }
 
-export async function findInvoicesById(id: number): Promise<Invoice | undefined> {
-  const connect = await pool.query<InvoiceRow>(
-    `${baseQuery} WHERE invoices.id = $1;`,
-    [id]
-  );
-  if (!connect.rows.length) return undefined;
+export async function findInvoiceById(
+  id: number,
+): Promise<Invoice | undefined> {
+  const record = await prisma.invoice.findUnique({
+    where: { id },
+    include: { customer: true },
+  });
 
-  return toInvoice(connect.rows[0]);
+  return !record ? undefined : formatInvoice(record);
 }
 
 export async function findRecentInvoices(): Promise<Invoice[]> {
-  const connect = await pool.query<InvoiceRow>(
-    `${baseQuery} ORDER BY invoices.created_at DESC LIMIT 5;`
-  );
-  return toInvoices(connect.rows);
+  const records = await prisma.invoice.findMany({
+    include: { customer: true },
+    orderBy: { id: 'desc' },
+    take: 5,
+  });
+
+  return records.map(formatInvoice);
 }
 
 export async function findOverdueInvoices(): Promise<Invoice[]> {
-  const connect = await pool.query<InvoiceRow>(
-    `${baseQuery} 
-     WHERE invoices.status = 'pending' AND invoices.due_date < CURRENT_DATE
-     ORDER BY invoices.issue_date 
-     LIMIT 5;`
-  );
-  return toInvoices(connect.rows);
+  const records = await prisma.invoice.findMany({
+    where: {
+      status: 'pending',
+      dueDate: { lt: new Date() },
+    },
+    include: { customer: true },
+    orderBy: { dueDate: 'asc' },
+    take: 5,
+  });
+
+  return records.map(formatInvoice);
 }
 
-export async function insertInvoice(data: CreateInvoicePayload): Promise<Invoice | undefined> {
-  const result = await pool.query<{ id: number }>(
-    `INSERT INTO invoices (customer_id, amount, status, issue_date, due_date)
-     VALUES ($1, $2, $3, $4, $5)
-     RETURNING id;`,
-    [data.customerId, data.amount, data.status, data.issueDate, data.dueDate]
-  );
+export async function insertInvoice(
+  data: InvoiceInput,
+): Promise<Invoice> {
+  const record = await prisma.invoice.create({
+    data: {
+      customerId: data.customerId,
+      amount: data.amount,
+      status: data.status,
+      issueDate: new Date(data.issueDate),
+      dueDate: new Date(data.dueDate),
+    },
+    include: { customer: true },
+  });
 
-  if (!result.rows.length) return undefined;
-  return findInvoicesById(result.rows[0].id);
+  return formatInvoice(record);
 }
 
-export async function modifyInvoice(id: number, data: UpdateInvoicePayload): Promise<Invoice | undefined> {
-  const result = await pool.query<{ id: number }>(
-    `UPDATE invoices
-     SET customer_id = COALESCE($1, customer_id),
-         amount = COALESCE($2, amount),
-         status = COALESCE($3, status),
-         issue_date = COALESCE($4, issue_date),
-         due_date = COALESCE($5, due_date)
-     WHERE id = $6
-     RETURNING id;`,
-    [data.customerId, data.amount, data.status, data.issueDate, data.dueDate, id]
-  );
+export async function modifyInvoice(
+  id: number,
+  data: InvoiceInput,
+): Promise<Invoice | undefined> {
+  const existing = await findInvoiceById(id);
 
-  if (!result.rows.length) return undefined;
-  return findInvoicesById(id);
+  if (!existing) return;
+
+  const record = await prisma.invoice.update({
+    where: { id },
+    data: {
+      customerId: data.customerId,
+      amount: data.amount,
+      status: data.status,
+      issueDate: new Date(data.issueDate),
+      dueDate: new Date(data.dueDate),
+    },
+    include: { customer: true },
+  });
+
+  return formatInvoice(record);
 }
 
-export async function removeInvoice(id: number): Promise<boolean> {
-  const result = await pool.query(
-    `DELETE FROM invoices WHERE id = $1;`,
-    [id]
-  );
-  return (result.rowCount ?? 0) > 0;
+export async function removeInvoice(
+  id: number,
+): Promise<InvoiceRecord | undefined> {
+  const existing = await findInvoiceById(id);
+
+  if (!existing) return;
+
+  return await prisma.invoice.delete({ where: { id } });
 }
