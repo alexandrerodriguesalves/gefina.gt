@@ -6,12 +6,12 @@ import prisma from './prisma.ts';
 
 const user = {
   id: 0,
-  email: 'usuario@teste.com.br',
+  email: 'usuario@teste.com.br'
 };
 
 const customer = {
   id: 0,
-  email: 'cliente@teste.com.br',
+  email: 'cliente@teste.com.br'
 };
 
 const invoice = { id: 0 };
@@ -21,8 +21,8 @@ async function populate(): Promise<void> {
     data: {
       name: 'Usuário de Teste',
       email: user.email,
-      passwordHash: 'placeholder',
-    },
+      passwordHash: 'placeholder'
+    }
   });
   user.id = createdUser.id;
 
@@ -30,8 +30,8 @@ async function populate(): Promise<void> {
     data: {
       userId: user.id,
       name: 'Cliente de Teste',
-      email: customer.email,
-    },
+      email: customer.email
+    }
   });
   customer.id = createdCustomer.id;
 
@@ -41,15 +41,15 @@ async function populate(): Promise<void> {
       amount: 125037,
       status: 'pending',
       issueDate: new Date('2026-10-01'),
-      dueDate: new Date('2026-10-31'),
-    },
+      dueDate: new Date('2026-10-31')
+    }
   });
   invoice.id = createdInvoice.id;
 }
 
 async function clear(): Promise<void> {
   await prisma.invoice.deleteMany({
-    where: { customerId: customer.id },
+    where: { customerId: customer.id }
   });
   await prisma.customer.deleteMany({ where: { userId: user.id } });
   await prisma.user.deleteMany({ where: { id: user.id } });
@@ -81,7 +81,7 @@ describe('rotas de fatura', () => {
       amount: 55555,
       status: 'pending',
       issueDate: '2026-10-01',
-      dueDate: '2026-10-31',
+      dueDate: '2026-10-31'
     });
 
     expect(response.status).toBe(201);
@@ -96,7 +96,7 @@ describe('rotas de fatura', () => {
         amount: 125037,
         status: 'paid',
         issueDate: '2026-10-01',
-        dueDate: '2026-10-31',
+        dueDate: '2026-10-31'
       });
 
     expect(response.status).toBe(200);
@@ -105,7 +105,7 @@ describe('rotas de fatura', () => {
 
   it('remove fatura', async () => {
     const removal = await request.delete(
-      `/api/invoices/${invoice.id}`,
+      `/api/invoices/${invoice.id}`
     );
     const search = await request.get(`/api/invoices/${invoice.id}`);
 
@@ -125,7 +125,7 @@ describe('rotas de fatura', () => {
       amount: 0,
       status: 'pending',
       issueDate: '2026-10-01',
-      dueDate: '2026-10-31',
+      dueDate: '2026-10-31'
     });
 
     expect(response.status).toBe(400);

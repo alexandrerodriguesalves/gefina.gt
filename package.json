@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./api/server.ts",
     "dev": "node --watch --env-file=.env ./api/server.ts",
-    "check": "tsc --noEmit && biome check ./",
+    "check": "tsc -p ./api/tsconfig.json --noEmit && tsc -p ./web/tsconfig.json --noEmit && biome check ./",
     "fix": "biome check --write ./",
     "fix:unsafe": "biome check --write --unsafe ./",
     "test": "npm test --prefix ./api"
