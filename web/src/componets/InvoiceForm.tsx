@@ -3,17 +3,17 @@ import {
   type SubmitEvent,
   useState
 } from 'react';
-import type { CustomerOption } from './customerType.ts';
+import type { CustomersOptions } from '../types/costumerType.ts';
 import type {
   Invoice,
   InvoiceFieldErrors,
   InvoiceInput,
   InvoiceStatus
-} from './invoiceType.ts';
+} from '../types/invoiceType.ts';
 
 interface InvoiceFormProps {
   invoice: Invoice | null;
-  customers: CustomerOption[];
+  customers: CustomersOptions[];
   error: string | null;
   fieldErrors: InvoiceFieldErrors;
   confirmDelete: boolean;

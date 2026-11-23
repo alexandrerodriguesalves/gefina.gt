@@ -2,11 +2,11 @@ import type {
   Invoice as InvoiceRecord,
   Prisma
 } from '@prisma/client';
+import prisma from '../prisma.ts';
 import type {
   InvoiceInput,
   InvoiceStatus
-} from './invoice.schema.ts';
-import prisma from './prisma.ts';
+} from '../schemas/invoice.schema.ts';
 
 type InvoiceSituation = 'paid' | 'pending' | 'overdue';
 

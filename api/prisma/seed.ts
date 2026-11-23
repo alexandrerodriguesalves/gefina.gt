@@ -1,5 +1,5 @@
 import type { Prisma } from '@prisma/client';
-import prisma from '../prisma.ts';
+import prisma from '../src/prisma.ts';
 
 type UserRole = 'admin' | 'user';
 type InvoiceStatus = 'paid' | 'pending';
