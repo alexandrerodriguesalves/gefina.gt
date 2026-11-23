@@ -1,12 +1,13 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node ./server.ts",
-    "dev": "node --watch --env-file=.env ./server.ts",
+    "start": "node ./src/server.ts",
+    "dev": "node --watch --env-file=.env ./src/server.ts",
     "check": "tsc --noEmit",
     "test": "vitest run",
     "postinstall": "prisma generate",
-    "seed": "tsx --env-file=.env ./prisma/seed.ts"
+    "seed": "tsx --env-file=.env ./prisma/seed.ts",
+    "migrate:deploy": "prisma migrate deploy"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
