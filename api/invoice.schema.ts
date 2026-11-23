@@ -2,7 +2,7 @@ import { type ZodError, z } from 'zod';
 
 const invoiceStatusSchema = z.enum(['paid', 'pending'], {
   message:
-    'A situação informada é inválida. Os valores permitidos são "Paga" e "Pendente".',
+    'A situação informada é inválida. Os valores permitidos são "Paga" e "Pendente".'
 });
 export type InvoiceStatus = z.infer<typeof invoiceStatusSchema>;
 
@@ -18,11 +18,11 @@ export const invoiceSchema = z
       .positive('O valor da fatura deve ser maior que zero.'),
     status: invoiceStatusSchema,
     issueDate: z.iso.date({
-      message: 'A data de emissão deve ser uma data válida.',
+      message: 'A data de emissão deve ser uma data válida.'
     }),
     dueDate: z.iso.date({
-      message: 'A data de vencimento deve ser uma data válida.',
-    }),
+      message: 'A data de vencimento deve ser uma data válida.'
+    })
   })
   .refine(
     (datas) =>
@@ -31,8 +31,8 @@ export const invoiceSchema = z
     {
       message:
         'A data de vencimento não pode ser menor que a data de emissão.',
-      path: ['dueDate'],
-    },
+      path: ['dueDate']
+    }
   );
 
 export type InvoiceInput = z.infer<typeof invoiceSchema>;
@@ -46,13 +46,13 @@ interface InvoiceFieldErrors {
 }
 
 function firstError(
-  message: string[] | undefined,
+  message: string[] | undefined
 ): string | undefined {
   return !message ? undefined : message[0];
 }
 
 export function tofieldErrors(
-  error: ZodError<InvoiceInput>,
+  error: ZodError<InvoiceInput>
 ): InvoiceFieldErrors {
   const { fieldErrors } = z.flattenError(error);
 
@@ -61,6 +61,6 @@ export function tofieldErrors(
     amount: firstError(fieldErrors.amount),
     status: firstError(fieldErrors.status),
     issueDate: firstError(fieldErrors.issueDate),
-    dueDate: firstError(fieldErrors.dueDate),
+    dueDate: firstError(fieldErrors.dueDate)
   };
 }
