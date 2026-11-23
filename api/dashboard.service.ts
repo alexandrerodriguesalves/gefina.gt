@@ -39,11 +39,11 @@ export default async function findDashboard(): Promise<Dashboard> {
 
   return {
     totals: {
-      paid,
-      pending,
-      invoiceCount,
-      customerCount
-    },
+  paid,
+  pending,
+  invoiceCount,
+  customerCount
+},
     recentInvoices,
     overdueInvoices
   };
